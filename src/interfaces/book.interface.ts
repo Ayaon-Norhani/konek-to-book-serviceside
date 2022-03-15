@@ -9,5 +9,5 @@ export interface Book {
     Series: string;
     Notes: string;
     Book_Status: string;
-    Availability: string;
+    Availability: 'Yes' | 'No';
 }

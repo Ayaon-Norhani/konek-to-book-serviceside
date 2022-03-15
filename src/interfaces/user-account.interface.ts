@@ -9,4 +9,6 @@ export interface UserAccount {
     U_Birth_Date: string;
     Address: string;
     U_Contact_Number: string;
+    User_Type: 'librarian' | 'admin';
+    U_Status: 'active' | 'inactive';
 }

@@ -21,18 +21,21 @@ import { BorrowerService } from './borrower/borrower.service';
 import { IssuedBookService } from './issued-book/issued-book.service';
 import { IssuedBookController } from './issued-book/issued-book.controller';
 import { IssuedBookDto } from './entities/issued-book.dto';
-import { UserAccountService } from './user-account/user-account.service';
-import { UserAccountController } from './user-account/user-account.controller';
-import { UserAccountDto } from './entities/user-account.dto';
-import { UserTypeService } from './user-type/user-type.service';
-import { UserTypeController } from './user-type/user-type.controller';
-import { UserTypeDto } from './entities/user-type.dto';
-
-
+import { UserDto, UserController, UserService } from './user';
+import { AuthModule } from './user/auth.module';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([AuthorDto, CategoryDto, PublisherDto, BookDto, BookFinesDto, BorrowerDto, IssuedBookDto, UserAccountDto, UserTypeDto]),
+    TypeOrmModule.forFeature([
+      AuthorDto,
+      CategoryDto,
+      PublisherDto,
+      BookDto,
+      BookFinesDto,
+      BorrowerDto,
+      IssuedBookDto,
+      UserDto,
+    ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -40,12 +43,40 @@ import { UserTypeDto } from './entities/user-type.dto';
       username: 'root',
       password: 'root',
       database: 'konek_to_bookdb',
-      entities: [AuthorDto, CategoryDto, PublisherDto, BookDto, BookFinesDto, BorrowerDto, IssuedBookDto, UserAccountDto, UserTypeDto],
+      entities: [
+        AuthorDto,
+        CategoryDto,
+        PublisherDto,
+        BookDto,
+        BookFinesDto,
+        BorrowerDto,
+        IssuedBookDto,
+        UserDto,
+      ],
       synchronize: true,
       dropSchema: true,
     }),
+    AuthModule,
   ],
-  controllers: [AuthorController, CategoryController, PublisherController, BookController, BookFinesController, BorrowerController, IssuedBookController, UserAccountController, UserTypeController],
-  providers: [ AuthorService, CategoryService, PublisherService, BookService, BookFinesService, BorrowerService, IssuedBookService, UserAccountService, UserTypeService],
+  controllers: [
+    AuthorController,
+    CategoryController,
+    PublisherController,
+    BookController,
+    BookFinesController,
+    BorrowerController,
+    IssuedBookController,
+    UserController,
+  ],
+  providers: [
+    AuthorService,
+    CategoryService,
+    PublisherService,
+    BookService,
+    BookFinesService,
+    BorrowerService,
+    IssuedBookService,
+    UserService
+  ],
 })
 export class AppModule {}

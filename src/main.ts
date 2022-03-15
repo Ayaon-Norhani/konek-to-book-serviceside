@@ -9,8 +9,14 @@ async function bootstrap() {
     .setTitle('Konek To Book')
     .setDescription('The cats API description')
     .setVersion('1.0')
+    .addBearerAuth()
     .addTag('Library')
     .build();
+    app.enableCors({
+      origin: true,
+      methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
+      credentials: true,
+    });
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 

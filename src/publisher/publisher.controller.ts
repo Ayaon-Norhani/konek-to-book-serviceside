@@ -26,7 +26,7 @@ export class PublisherController {
     return this.publishersService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Publisher', operationId: 'GetPublisher' })
+  @ApiOperation({ summary: 'Get all Publisher', operationId: 'GetPublishers' })
   @ApiResponse({ status: 200, type: PublisherDto })
   @Get()
   async findAll(): Promise<PublisherDto[]> {
@@ -40,11 +40,16 @@ export class PublisherController {
     return this.publishersService.findOne(Publisher_ID);
   }
 
-  @ApiOperation({ summary: 'Update Publisher by ID', operationId: 'UpdateUserrs' })
+  @ApiOperation({ summary: 'Update Publisher by ID', operationId: 'UpdatePublisher' })
   @Put(':PublisherID')
   async update(@Param('PublisherID') Publisher_ID: number, @Body() job: PublisherDto) {
     return this.publishersService.update(Publisher_ID, job);
   }
+
+  @ApiOperation({
+    summary: 'Update Publishers by ID',
+    operationId: 'DeletePublisher',
+  })
 
   @ApiResponse({ status: 200, type: PublisherDto })
   @Delete(':PublisherID')

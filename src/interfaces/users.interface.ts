@@ -10,7 +10,7 @@ export interface Users {
   Address: string;
   U_Contact_Number: string;
   email?: string;
-  User_Type?: 'admin' | 'cashier';
+  User_Type?: 'admin' | 'librarian';
   User_Status: 'active' | 'inactive';
 
   // User_ID?: number;

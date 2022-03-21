@@ -7,11 +7,13 @@ import {
   JoinTable,
   ManyToMany,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { AuthorDto } from './author.dto';
 import { CategoryDto } from './category.dto';
 import { PublisherDto } from './publisher.dto';
+import { BookFinesDto } from './book-fines.dto';
 
 @Entity('book')
 export class BookDto implements Book {
@@ -69,4 +71,8 @@ export class BookDto implements Book {
   @ManyToOne(() => PublisherDto, (publishers) => publishers.books)
   @JoinColumn({ name: 'Publisher_ID' })
   publishers: PublisherDto[];
+
+  @OneToMany(() => BookFinesDto, (fine) => fine.book)
+  fine: BookFinesDto;
+  
 }

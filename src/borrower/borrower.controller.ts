@@ -27,7 +27,7 @@ export class BorrowerController {
     return this.borrowersService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Borrower', operationId: 'GetBorrower' })
+  @ApiOperation({ summary: 'Get all Borrower', operationId: 'GetBorrowers' })
   @ApiResponse({ status: 200, type: BorrowerDto })
   @Get()
   async findAll(): Promise<BorrowerDto[]> {
@@ -41,11 +41,18 @@ export class BorrowerController {
     return this.borrowersService.findOne(Borrower_ID);
   }
 
-  @ApiOperation({ summary: 'Update Borrower by ID', operationId: 'UpdateUserrs' })
+  @ApiOperation({ summary: 'Update Borrower by ID', operationId: 'UpdateBorrower' })
   @Put(':BorrowerID')
   async update(@Param('BorrowerID') Borrower_ID: number, @Body() job: BorrowerDto) {
     return this.borrowersService.update(Borrower_ID, job);
   }
+
+  
+  @ApiOperation({
+    summary: 'Update Borrowers by ID',
+    operationId: 'DeleteBorrower',
+  }) 
+
 
   @ApiResponse({ status: 200, type: BorrowerDto })
   @Delete(':BorrowerID')

@@ -13,7 +13,7 @@ export interface IUser {
   Address: string;
   U_Contact_Number: string;
   email?: string;
-  User_Type?: 'admin' | 'cashier';
+  User_Type?: 'admin' | 'librarian';
   User_Status: 'active' | 'inactive';
 }
 
@@ -21,23 +21,23 @@ export class RegisterUserDto implements IUser {
   @PrimaryGeneratedColumn()
   id?: number;
 
-  @ApiProperty({ default: 'Basam' })
+  @ApiProperty({ default: 'Jyyhan' })
   @Column({ length: 100 })
   U_First_Name: string;
 
-  @ApiProperty({ default: 'Cosain', required: false })
+  @ApiProperty({ default: 'Munsay', required: false })
   @Column({ length: 100, nullable: true })
   U_Middle_Name: string;
 
-  @ApiProperty({ default: 'Serad' })
+  @ApiProperty({ default: 'Alango' })
   @Column({ length: 100 })
   U_Last_Name: string;
 
-  @ApiProperty({ default: 'Male' })
+  @ApiProperty({ default: 'Female' })
   @Column({ length: 100 })
   Gender: string;
 
-  @ApiProperty({ default: '12/12/1998' })
+  @ApiProperty({ default: '12/15/1998' })
   @Column({ length: 100 })
   U_Birth_Date: string;
 
@@ -45,7 +45,7 @@ export class RegisterUserDto implements IUser {
   @Column({ length: 100 })
   Address: string;
 
-  @ApiProperty({ default: '+639067342939', required: false })
+  @ApiProperty({ default: '09501888973', required: false })
   @Column({ length: 100, nullable: true })
   U_Contact_Number: string;
 
@@ -55,7 +55,7 @@ export class RegisterUserDto implements IUser {
 
   @ApiProperty({ default: 'admin' })
   @Column({ length: 100 })
-  User_Type?: 'admin' | 'cashier';
+  User_Type?: 'admin' | 'librarian';
 
   @ApiProperty({ default: 'active' })
   @Column({ length: 100 })
@@ -84,7 +84,7 @@ export class LoginUserDto implements IUser {
   @ApiProperty()
   password?: string;
   email?: string;
-  User_Type?: 'admin' | 'cashier';
+  User_Type?: 'admin' | 'librarian';
   User_Status: 'active' | 'inactive';
 }
 

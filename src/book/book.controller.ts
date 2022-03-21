@@ -26,7 +26,7 @@ export class BookController {
     return this.booksService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Book', operationId: 'GetBook' })
+  @ApiOperation({ summary: 'Get all Book', operationId: 'GetBooks' })
   @ApiResponse({ status: 200, type: BookDto })
   @Get()
   async findAll(): Promise<BookDto[]> {
@@ -40,11 +40,16 @@ export class BookController {
     return this.booksService.findOne(Book_ID);
   }
 
-  @ApiOperation({ summary: 'Update Book by ID', operationId: 'UpdateUserrs' })
+  @ApiOperation({ summary: 'Update Book by ID', operationId: 'UpdateBook' })
   @Put(':BookID')
   async update(@Param('BookID') Book_ID: number, @Body() job: BookDto) {
     return this.booksService.update(Book_ID, job);
   }
+
+  @ApiOperation({
+    summary: 'Update Books by ID',
+    operationId: 'DeleteBook',
+  })
 
   @ApiResponse({ status: 200, type: BookDto })
   @Delete(':BookID')

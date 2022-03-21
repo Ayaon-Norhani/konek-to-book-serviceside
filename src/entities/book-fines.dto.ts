@@ -5,9 +5,12 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
 import { BorrowerDto } from './borrower.dto';
+import { BookDto } from './book.dto';
+import { IssuedBookDto } from './issued-book.dto';
 
 @Entity('bookfines')
 export class BookFinesDto implements BookFines {
@@ -30,5 +33,12 @@ export class BookFinesDto implements BookFines {
   @ManyToOne(() => BorrowerDto, (borrower) => borrower.fine)
   @JoinColumn({ name: 'Borrower_ID' })
   borrower: BorrowerDto[];
+
+  @ManyToOne(() => BookDto, (book) => book.fine)
+  @JoinColumn({ name: 'Book_ID' })
+  book: BookDto[];
+
+  @OneToMany(() => IssuedBookDto, (issued) => issued.fines)
+  issued: IssuedBookDto;
   
 }

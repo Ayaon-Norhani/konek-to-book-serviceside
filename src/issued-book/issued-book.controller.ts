@@ -26,7 +26,7 @@ export class IssuedBookController {
     return this.issuebooksService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all IssuedBook', operationId: 'GetIssuedBook' })
+  @ApiOperation({ summary: 'Get all IssuedBook', operationId: 'GetIssuedBooks' })
   @ApiResponse({ status: 200, type: IssuedBookDto })
   @Get()
   async findAll(): Promise<IssuedBookDto[]> {
@@ -40,11 +40,17 @@ export class IssuedBookController {
     return this.issuebooksService.findOne(IssuedBook_ID);
   }
 
-  @ApiOperation({ summary: 'Update IssuedBook by ID', operationId: 'UpdateUserrs' })
+  @ApiOperation({ summary: 'Update IssuedBook by ID', operationId: 'UpdateIssuedBook' })
   @Put(':IssuedBookID')
   async update(@Param('IssuedBookID') IssuedBook_ID: number, @Body() job: IssuedBookDto) {
     return this.issuebooksService.update(IssuedBook_ID, job);
   }
+
+  @ApiOperation({
+    summary: 'Update IssuedBooks by ID',
+    operationId: 'DeleteIssuedBook',
+  })
+
 
   @ApiResponse({ status: 200, type: IssuedBookDto })
   @Delete(':IssuedBookID')

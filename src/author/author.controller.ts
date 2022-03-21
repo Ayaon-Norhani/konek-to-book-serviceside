@@ -26,7 +26,7 @@ export class AuthorController {
     return this.authorsService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Author', operationId: 'GetAuthor' })
+  @ApiOperation({ summary: 'Get all Author', operationId: 'GetAuthors' })
   @ApiResponse({ status: 200, type: AuthorDto })
   @Get()
   async findAll(): Promise<AuthorDto[]> {
@@ -40,11 +40,16 @@ export class AuthorController {
     return this.authorsService.findOne(Author_ID);
   }
 
-  @ApiOperation({ summary: 'Update Author by ID', operationId: 'UpdateUserrs' })
+  @ApiOperation({ summary: 'Update Author by ID', operationId: 'UpdateAuthor' })
   @Put(':AuthorID')
   async update(@Param('AuthorID') Author_ID: number, @Body() job: AuthorDto) {
     return this.authorsService.update(Author_ID, job);
   }
+
+  @ApiOperation({
+    summary: 'Update Authors by ID',
+    operationId: 'DeleteAuthor',
+  })
 
   @ApiResponse({ status: 200, type: AuthorDto })
   @Delete(':AuthorID')

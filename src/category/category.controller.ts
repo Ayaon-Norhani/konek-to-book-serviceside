@@ -27,7 +27,7 @@ export class CategoryController {
     return this.categorysService.create(job);
   }
 
-  @ApiOperation({ summary: 'Get all Category', operationId: 'GetCategory' })
+  @ApiOperation({ summary: 'Get all Category', operationId: 'GetCategories'})
   @ApiResponse({ status: 200, type: CategoryDto })
   @Get()
   async findAll(): Promise<CategoryDto[]> {
@@ -41,11 +41,15 @@ export class CategoryController {
     return this.categorysService.findOne(Category_ID);
   }
 
-  @ApiOperation({ summary: 'Update Category by ID', operationId: 'UpdateUserrs' })
+  @ApiOperation({ summary: 'Update Category by ID', operationId: 'UpdateCategory' })
   @Put(':CategoryID')
   async update(@Param('CategoryID') Category_ID: number, @Body() job: CategoryDto) {
     return this.categorysService.update(Category_ID, job);
   }
+  @ApiOperation({
+    summary: 'Update Categories by ID',
+    operationId: 'DeleteCategory',
+  })
 
   @ApiResponse({ status: 200, type: CategoryDto })
   @Delete(':CategoryID')

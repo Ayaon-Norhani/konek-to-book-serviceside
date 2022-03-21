@@ -10,6 +10,7 @@ import {
 } from 'typeorm';
 import { BorrowerDto } from './borrower.dto';
 import { BookDto } from './book.dto';
+import { BookFinesDto } from './book-fines.dto';
 
 @Entity('issuedbook')
 export class IssuedBookDto implements IssuedBook {
@@ -39,8 +40,14 @@ export class IssuedBookDto implements IssuedBook {
   @ManyToOne(() => BorrowerDto, (borrowerss) => borrowerss.issued)
   @JoinColumn({ name: 'Borrower_ID' })
   borrowerss: BorrowerDto[];
+  
+  @ManyToOne(() => BookFinesDto, (fines) => fines.issued)
+  @JoinColumn({ name: 'BookFines_ID' })
+  fines: BookFinesDto[];
 
   @OneToOne(() => BookDto)
   @JoinColumn({ name: 'Book_ID' })
   book: BookDto;
+
+
 }

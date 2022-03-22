@@ -38,6 +38,7 @@ export class BookFinesDto implements BookFines {
   @JoinColumn({ name: 'Book_ID' })
   book: BookDto[];
 
+  
   @OneToMany(() => IssuedBookDto, (issued) => issued.fines)
   issued: IssuedBookDto;
   

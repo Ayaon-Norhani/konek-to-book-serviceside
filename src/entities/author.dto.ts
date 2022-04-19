@@ -5,6 +5,7 @@ import { BookDto } from './book.dto';
 
 @Entity('author')
 export class AuthorDto implements Author {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   Author_ID?: number;
 

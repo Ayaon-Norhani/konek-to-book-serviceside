@@ -16,7 +16,9 @@ export class BorrowerService {
       }
     
       async findAll(): Promise<BorrowerDto[]> {
-        return this.borrowerRepository.find();
+        return this.borrowerRepository.find({
+          relations: [],
+        });
       }
     
       async findOne(Borrower_ID: number): Promise<BorrowerDto> {

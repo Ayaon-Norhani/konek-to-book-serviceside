@@ -5,6 +5,7 @@ import { BookDto } from './book.dto';
 
 @Entity('category')
 export class CategoryDto implements Category {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   Category_ID?: number;
 
@@ -12,6 +13,8 @@ export class CategoryDto implements Category {
   @Column({ length: 100 })
   C_Description: string;
 
-  @OneToMany(() => BookDto, (books) => books.categories)
-  books: BookDto;
+  @OneToMany(() => BookDto, (books) => books.categories, {
+    nullable: true,
+  })
+  bookcategory: BookDto[];
 }

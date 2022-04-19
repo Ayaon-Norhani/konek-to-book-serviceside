@@ -13,6 +13,7 @@ import { BookFinesDto } from './book-fines.dto';
 
 @Entity('borrower')
 export class BorrowerDto implements Borrower {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   Borrower_ID?: number;
 
@@ -20,15 +21,15 @@ export class BorrowerDto implements Borrower {
   @Column({ length: 100 })
   Student_ID: string;
 
-  @ApiProperty({ example: 'Najmah' })
+  @ApiProperty({ example: 'Annehayrah' })
   @Column({ length: 100 })
   B_First_Name: string;
 
-  @ApiProperty({ example: 'A' })
+  @ApiProperty({ example: 'P' })
   @Column({ length: 100 })
   B_Middle_Name: string;
 
-  @ApiProperty({ example: 'Omar' })
+  @ApiProperty({ example: 'Racman' })
   @Column({ length: 100 })
   B_Last_Name: string;
 
@@ -40,11 +41,24 @@ export class BorrowerDto implements Borrower {
   @Column({ length: 100 })
   B_Contact_Number: string;
 
-  @OneToMany(() => IssuedBookDto, (issued) => issued.borrowerss)
+  /* @OneToMany(() => IssuedBookDto, (issued) => issued.borrowerss)
   issued: IssuedBookDto;
 
-  @OneToMany(() => BookFinesDto, (fine) => fine.borrower)
+   @OneToMany(() => BookFinesDto, (fine) => fine.borrower)
   fine: BookFinesDto;
+
+    @OneToOne(() => IssuedBookDto)
+  @JoinColumn({ name: 'IssuedBook_ID' })
+  issuedbook: IssuedBookDto;
+*/
+
+  @OneToMany(() => IssuedBookDto, (issued) => issued.borrowerss)
+  issued: IssuedBookDto[];
+
+  @OneToMany(() => BookFinesDto, (fine) => fine.borrower, {
+    nullable: true,
+  })
+  fine: BookFinesDto[];
 
   @OneToOne(() => IssuedBookDto)
   @JoinColumn({ name: 'IssuedBook_ID' })

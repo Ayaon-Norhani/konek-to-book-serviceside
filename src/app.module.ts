@@ -53,8 +53,8 @@ import { AuthModule } from './user/auth.module';
         IssuedBookDto,
         UserDto,
       ],
-       // synchronize: true,
-       // dropSchema: true,
+      synchronize: true,
+      dropSchema: true,
     }),
     AuthModule,
   ],
@@ -76,7 +76,7 @@ import { AuthModule } from './user/auth.module';
     BookFinesService,
     BorrowerService,
     IssuedBookService,
-    UserService
+    UserService,
   ],
 })
 export class AppModule {}

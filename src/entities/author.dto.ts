@@ -1,10 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import {
-  Column,
-  Entity,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Author } from '../interfaces/author.interface';
 import { BookDto } from './book.dto';
 
@@ -17,8 +12,8 @@ export class AuthorDto implements Author {
   @Column({ length: 100 })
   A_First_Name: string;
 
-  @ApiProperty({ example: 'G' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: 'G', required: false })
+  @Column({ length: 100, nullable: true })
   A_Middle_Name: string;
 
   @ApiProperty({ example: 'Alango' })
@@ -29,6 +24,6 @@ export class AuthorDto implements Author {
   @Column({ length: 100 })
   Location: string;
 
-  @ManyToMany(() => BookDto, (book) => book.authors)
-  book: BookDto[];
+  @OneToMany(() => BookDto, (books) => books.authors)
+  bookauthors: BookDto[];
 }

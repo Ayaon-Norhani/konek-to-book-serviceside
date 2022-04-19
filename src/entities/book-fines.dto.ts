@@ -3,7 +3,6 @@ import { BookFines } from '../interfaces/book-fines.interface';
 import {
   Column,
   Entity,
-  JoinColumn,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -14,6 +13,7 @@ import { IssuedBookDto } from './issued-book.dto';
 
 @Entity('bookfines')
 export class BookFinesDto implements BookFines {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   BookFines_ID?: number;
 
@@ -30,16 +30,26 @@ export class BookFinesDto implements BookFines {
   Payment_Status: string;
   borrowers: any;
 
-  @ManyToOne(() => BorrowerDto, (borrower) => borrower.fine)
+  /*@ManyToOne(() => BorrowerDto, (borrower) => borrower.fine)
   @JoinColumn({ name: 'Borrower_ID' })
   borrower: BorrowerDto[];
 
-  @ManyToOne(() => BookDto, (book) => book.fine)
+   @ManyToOne(() => BookDto, (book) => book.fine)
   @JoinColumn({ name: 'Book_ID' })
   book: BookDto[];
 
-  
   @OneToMany(() => IssuedBookDto, (issued) => issued.fines)
   issued: IssuedBookDto;
-  
+*/
+
+  @ApiProperty({ required: false, type: () => BorrowerDto })
+  @ManyToOne(() => BorrowerDto, (borrower) => borrower.fine)
+  borrower: BorrowerDto;
+
+  @ApiProperty({ required: false, type: () => BookDto })
+  @ManyToOne(() => BookDto, (book) => book.fine)
+  book: BookDto;
+
+  @OneToMany(() => IssuedBookDto, (issued) => issued.fines)
+  issued: IssuedBookDto[];
 }

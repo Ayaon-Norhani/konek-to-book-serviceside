@@ -8,18 +8,20 @@ export class PublisherDto implements Publisher {
   @PrimaryGeneratedColumn()
   Publisher_ID?: number;
 
-  @ApiProperty({ example: 'jjkkkk' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: '0928-192-9' , required: false})
+  @Column({ length: 100, nullable: true })
   Publisher: string;
 
-  @ApiProperty({ example: 'jnjaxjb' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: '01-02-1978' , required: false})
+  @Column({ length: 100 , nullable: true})
   DateOfPublication: string;
 
-  @ApiProperty({ example: 'California' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: 'California', required: false })
+  @Column({ length: 100, nullable: true })
   PlaceOfPublication: string;
 
-  @OneToMany(() => BookDto, (books) => books.publishers)
-  books: BookDto;
+  @OneToMany(() => BookDto, (books) => books.publishers, {
+    nullable: true,
+  })
+  bookpublisher: BookDto[];
 }

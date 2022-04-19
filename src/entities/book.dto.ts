@@ -3,9 +3,6 @@ import { Book } from '../interfaces/book.interface';
 import {
   Column,
   Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -17,6 +14,7 @@ import { BookFinesDto } from './book-fines.dto';
 
 @Entity('book')
 export class BookDto implements Book {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   Book_ID?: number;
 
@@ -24,32 +22,32 @@ export class BookDto implements Book {
   @Column({ length: 100 })
   ISBN: string;
 
-  @ApiProperty({ example: '906' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: '906', required: false })
+  @Column({ length: 100, nullable: true })
   Call_Number: string;
 
   @ApiProperty({ example: 'Data Structure and Algorithms' })
   @Column({ length: 100 })
   Title: string;
 
-  @ApiProperty({ example: '2nd Edition' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: '2nd Edition', required: false })
+  @Column({ length: 100, nullable: true })
   Edition: string;
 
-  @ApiProperty({ example: '567809' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: '567809', required: false })
+  @Column({ length: 100, nullable: true })
   DateOfPublication: string;
 
-  @ApiProperty({ example: 'ii' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: 'ii', required: false })
+  @Column({ length: 100, nullable: true })
   Pages: string;
 
-  @ApiProperty({ example: 'jakka' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: '2nd Series', required: false })
+  @Column({ length: 100, nullable: true })
   Series: string;
 
-  @ApiProperty({ example: 'comment or concern' })
-  @Column({ length: 100 })
+  @ApiProperty({ example: 'comment or concern', required: false })
+  @Column({ length: 100, nullable: true })
   Notes: string;
 
   @ApiProperty({ example: 'New' })
@@ -60,8 +58,12 @@ export class BookDto implements Book {
   @Column({ length: 100 })
   Availability: 'Yes' | 'No';
 
-  @ManyToMany(() => AuthorDto)
+  /* @ManyToMany(() => AuthorDto)
   @JoinTable({ name: 'Author_ID' })
+  authors: AuthorDto[];
+
+   @ManyToOne(() => AuthorDto, (authors) => authors.books)
+  @JoinColumn({ name: 'Author_ID' })
   authors: AuthorDto[];
 
   @ManyToOne(() => CategoryDto, (categories) => categories.books)
@@ -72,7 +74,24 @@ export class BookDto implements Book {
   @JoinColumn({ name: 'Publisher_ID' })
   publishers: PublisherDto[];
 
-  @OneToMany(() => BookFinesDto, (fine) => fine.book)
+   @OneToMany(() => BookFinesDto, (fine) => fine.book)
   fine: BookFinesDto;
-  
+*/
+
+  @ApiProperty({ required: false, type: () => AuthorDto })
+  @ManyToOne(() => AuthorDto, (authors) => authors.bookauthors)
+  authors: AuthorDto;
+
+  @ApiProperty({ required: false, type: () => CategoryDto })
+  @ManyToOne(() => CategoryDto, (categories) => categories.bookcategory)
+  categories: CategoryDto;
+
+  @ApiProperty({ required: false, type: () => PublisherDto })
+  @ManyToOne(() => PublisherDto, (publishers) => publishers.bookpublisher, {
+    nullable: true,
+  })
+  publishers: PublisherDto;
+
+  @OneToMany(() => BookFinesDto, (fine) => fine.book)
+  fine: BookFinesDto[];
 }

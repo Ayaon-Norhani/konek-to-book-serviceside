@@ -5,6 +5,7 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
@@ -49,6 +50,16 @@ export class IssuedBookDto implements IssuedBook {
   @ManyToOne(() => BookFinesDto, (fines) => fines.issued)
   @JoinColumn({ name: 'BookFines_ID' })
   fines: BookFinesDto[];
+
+   @OneToOne(() => BookDto)
+  @JoinColumn({ name: 'Book_ID' })
+  book: BookDto;
+
+  -------- Borrower
+   @OneToMany(() => BorrowerDto, (borrowers) => borrowers.issuedbk, {
+    nullable: true,
+  })
+  borrowers: BorrowerDto[];
   */
 
   @ApiProperty({ required: false, type: () => BorrowerDto })
@@ -59,7 +70,7 @@ export class IssuedBookDto implements IssuedBook {
   @ManyToOne(() => BookFinesDto, (fines) => fines.issued)
   fines: BookFinesDto;
 
-  @OneToOne(() => BookDto)
-  @JoinColumn({ name: 'Book_ID' })
-  book: BookDto;
+  @ApiProperty({ required: false, type: () => BookDto })
+  @ManyToOne(() => BookDto, (book) => book.issue)
+  books: BookDto;
 }

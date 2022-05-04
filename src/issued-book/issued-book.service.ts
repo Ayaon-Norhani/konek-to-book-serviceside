@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { IssuedBookDto } from '../entities/issued-book.dto';
-import { Repository } from 'typeorm';
+import { Like, Repository } from 'typeorm';
 
 @Injectable()
 export class IssuedBookService {
@@ -28,6 +28,14 @@ export class IssuedBookService {
     
       async deleteOne(IssuedBook_ID: number) {
         return this.issuebookRepository.delete(IssuedBook_ID);
+      }
+
+      async filter(keyword: string): Promise<IssuedBookDto[]> {
+        return this.issuebookRepository.find({
+          relations: ['fines'],
+          select: ['Title'],
+          where: { IssuedBook_Status: Like(`%${keyword}%`) },
+        });
       }
     }
     

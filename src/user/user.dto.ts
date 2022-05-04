@@ -18,6 +18,7 @@ export interface IUser {
 }
 
 export class RegisterUserDto implements IUser {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   id?: number;
 

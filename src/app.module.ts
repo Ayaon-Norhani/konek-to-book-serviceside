@@ -54,7 +54,7 @@ import { AuthModule } from './user/auth.module';
         UserDto,
       ],
       //synchronize: true,
-     //dropSchema: true,
+      //dropSchema: true,
     }),
     AuthModule,
   ],

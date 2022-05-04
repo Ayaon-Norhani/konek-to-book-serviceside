@@ -13,8 +13,6 @@ export class CategoryDto implements Category {
   @Column({ length: 100 })
   C_Description: string;
 
-  @OneToMany(() => BookDto, (books) => books.categories, {
-    nullable: true,
-  })
+  @OneToMany(() => BookDto, (books) => books.categories)
   bookcategory: BookDto[];
 }

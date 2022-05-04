@@ -11,6 +11,7 @@ import { AuthorDto } from './author.dto';
 import { CategoryDto } from './category.dto';
 import { PublisherDto } from './publisher.dto';
 import { BookFinesDto } from './book-fines.dto';
+import { IssuedBookDto } from './issued-book.dto';
 
 @Entity('book')
 export class BookDto implements Book {
@@ -94,4 +95,7 @@ export class BookDto implements Book {
 
   @OneToMany(() => BookFinesDto, (fine) => fine.book)
   fine: BookFinesDto[];
+
+  @OneToMany(() => IssuedBookDto, (issue) => issue.books)
+  issue: IssuedBookDto[];
 }

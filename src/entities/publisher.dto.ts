@@ -5,23 +5,22 @@ import { BookDto } from './book.dto';
 
 @Entity('publisher')
 export class PublisherDto implements Publisher {
+  @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
   Publisher_ID?: number;
 
-  @ApiProperty({ example: '0928-192-9' , required: false})
+  @ApiProperty({ example: '0928-192-9', required: false })
   @Column({ length: 100, nullable: true })
   Publisher: string;
 
-  @ApiProperty({ example: '01-02-1978' , required: false})
-  @Column({ length: 100 , nullable: true})
+  @ApiProperty({ example: '01-02-1978', required: false })
+  @Column({ length: 100, nullable: true })
   DateOfPublication: string;
 
   @ApiProperty({ example: 'California', required: false })
   @Column({ length: 100, nullable: true })
   PlaceOfPublication: string;
 
-  @OneToMany(() => BookDto, (books) => books.publishers, {
-    nullable: true,
-  })
+  @OneToMany(() => BookDto, (books) => books.publishers)
   bookpublisher: BookDto[];
 }

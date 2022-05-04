@@ -15,7 +15,9 @@ export class BookFinesService {
   }
 
   async findAll(): Promise<BookFinesDto[]> {
-    return this.bookfinesRepository.find();
+    return this.bookfinesRepository.find({
+      relations:['book', 'issued', 'borrower']
+    });
   }
 
   async findOne(BookFines_ID: number): Promise<BookFinesDto> {

@@ -1,13 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Borrower } from '../interfaces/borrower.interface';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  OneToMany,
-  OneToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { IssuedBookDto } from './issued-book.dto';
 import { BookFinesDto } from './book-fines.dto';
 
@@ -50,6 +43,11 @@ export class BorrowerDto implements Borrower {
     @OneToOne(() => IssuedBookDto)
   @JoinColumn({ name: 'IssuedBook_ID' })
   issuedbook: IssuedBookDto;
+
+  ------- issued book_ID (FK)
+  @ApiProperty({ required: false, type: () => IssuedBookDto })
+  @ManyToOne(() => IssuedBookDto, (issuedbk) => issuedbk.borrowers)
+  issuedbk: IssuedBookDto;
 */
 
   @OneToMany(() => IssuedBookDto, (issued) => issued.borrowerss)
@@ -59,8 +57,4 @@ export class BorrowerDto implements Borrower {
     nullable: true,
   })
   fine: BookFinesDto[];
-
-  @OneToOne(() => IssuedBookDto)
-  @JoinColumn({ name: 'IssuedBook_ID' })
-  issuedbook: IssuedBookDto;
 }

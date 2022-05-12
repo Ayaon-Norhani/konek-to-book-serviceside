@@ -5,18 +5,18 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class BookFinesService {
- constructor(
-     @InjectRepository(BookFinesDto)
-     private bookfinesRepository: Repository<BookFinesDto>,
- ) {}
-  
- async create(application: BookFinesDto): Promise<BookFinesDto> {
+  constructor(
+    @InjectRepository(BookFinesDto)
+    private bookfinesRepository: Repository<BookFinesDto>,
+  ) {}
+
+  async create(application: BookFinesDto): Promise<BookFinesDto> {
     return this.bookfinesRepository.save(application);
   }
 
   async findAll(): Promise<BookFinesDto[]> {
     return this.bookfinesRepository.find({
-      relations:['book', 'issued', 'borrower']
+      relations: ['book', 'issued', 'borrower'],
     });
   }
 

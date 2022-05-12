@@ -60,17 +60,24 @@ export class IssuedBookDto implements IssuedBook {
     nullable: true,
   })
   borrowers: BorrowerDto[];
+
+   @ApiProperty({ required: false, type: () => BorrowerDto })
+  @ManyToOne(() => BookFinesDto, (fines) => fines.issued)
+  fines: BookFinesDto;
+
+   @OneToMany(() => BookFinesDto, (fines) => fines.issued)
+  fines: BookFinesDto[];
   */
 
   @ApiProperty({ required: false, type: () => BorrowerDto })
   @ManyToOne(() => BorrowerDto, (borrowerss) => borrowerss.issued)
   borrowerss: BorrowerDto;
 
-  @ApiProperty({ required: false, type: () => BorrowerDto })
-  @ManyToOne(() => BookFinesDto, (fines) => fines.issued)
-  fines: BookFinesDto;
-
   @ApiProperty({ required: false, type: () => BookDto })
-  @ManyToOne(() => BookDto, (book) => book.issue)
+  @ManyToOne(() => BookDto, (books) => books.issue)
   books: BookDto;
+
+  @OneToMany(() => BookFinesDto, (fines) => fines.issued)
+  fines: BookFinesDto[];
+  
 }

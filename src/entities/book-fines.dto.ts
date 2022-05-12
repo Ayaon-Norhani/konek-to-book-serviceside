@@ -17,6 +17,14 @@ export class BookFinesDto implements BookFines {
   @PrimaryGeneratedColumn()
   BookFines_ID?: number;
 
+  @ApiProperty({ example: 'Algorithms' })
+  @Column({ length: 100 })
+  Title: string;
+
+  @ApiProperty({ example: 'Jyyhan' })
+  @Column({ length: 100 })
+  Borrower_Name: string;
+
   @ApiProperty({ example: '09-23-22' })
   @Column({ length: 100 })
   Fine_Date: string;
@@ -40,6 +48,10 @@ export class BookFinesDto implements BookFines {
 
   @OneToMany(() => IssuedBookDto, (issued) => issued.fines)
   issued: IssuedBookDto;
+
+   @ApiProperty({ required: false, type: () => IssuedBookDto })
+  @ManyToOne(() => IssuedBookDto, (issued) => issued.fines)
+  issued: IssuedBookDto;
 */
 
   @ApiProperty({ required: false, type: () => BorrowerDto })
@@ -50,6 +62,7 @@ export class BookFinesDto implements BookFines {
   @ManyToOne(() => BookDto, (book) => book.fine)
   book: BookDto;
 
-  @OneToMany(() => IssuedBookDto, (issued) => issued.fines)
-  issued: IssuedBookDto[];
+  @ApiProperty({ required: false, type: () => IssuedBookDto })
+  @ManyToOne(() => IssuedBookDto, (issued) => issued.fines)
+  issued: IssuedBookDto;
 }

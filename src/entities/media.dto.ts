@@ -6,7 +6,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class MediaDto implements Media {
   @ApiProperty({ required: false })
   @PrimaryGeneratedColumn()
-  id?: number;
+  Media_id?: number;
 
   @ApiProperty()
   @Column()

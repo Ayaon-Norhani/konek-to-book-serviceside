@@ -18,20 +18,20 @@ export class MediaService {
     return await this.mediaRepository.save(createFile);
   }
 
-  async update(id: number, file: Express.Multer.File) {
+  async update(Media_id: number, file: Express.Multer.File) {
     const createFile = this.mediaRepository.create({
       data: file.buffer,
       filename: file.filename || file.originalname,
       mimeType: file.mimetype,
     });
-    return await this.mediaRepository.update(id, createFile);
+    return await this.mediaRepository.update(Media_id, createFile);
   }
-  async findOne(id: number): Promise<MediaDto> {
-    return await this.mediaRepository.findOne(id);
+  async findOne(Media_id: number): Promise<MediaDto> {
+    return await this.mediaRepository.findOne(Media_id);
   }
 
-  async deleteOne(id: number) {
-    return this.mediaRepository.delete(id);
+  async deleteOne(Media_id: number) {
+    return this.mediaRepository.delete(Media_id);
   }
 }
 export default MediaService;

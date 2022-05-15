@@ -48,24 +48,24 @@ import {
     }
   
     @ApiOperation({
-      summary: 'Get Media by id',
+      summary: 'Get Media by Media_id',
       operationId: 'GetMedia',
     })
     @ApiResponse({ status: 201, type: MediaDto })
-    @Get(':id')
-    async downloadFile(@Param('id') id: number, @Res() res: Response) {
-      const fileinfo = await this.mediaService.findOne(id);
+    @Get(':Media_id')
+    async downloadFile(@Param('Media_id') Media_id: number, @Res() res: Response) {
+      const fileinfo = await this.mediaService.findOne(Media_id);
       res.type(fileinfo.mimeType).send(Buffer.from(fileinfo.data));
     }
   
     @ApiOperation({
-      summary: 'Delete Media by id',
+      summary: 'Delete Media by Media_id',
       operationId: 'DeleteMedia',
     })
     @ApiResponse({ status: 200, type: MediaDto })
-    @Delete(':id')
-    async delete(@Param('id') id: number) {
-      return this.mediaService.deleteOne(id);
+    @Delete(':Media_id')
+    async delete(@Param('Media_id') Media_id: number) {
+      return this.mediaService.deleteOne(Media_id);
     }
   }
   

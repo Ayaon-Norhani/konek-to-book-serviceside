@@ -23,9 +23,10 @@ import { IssuedBookController } from './issued-book/issued-book.controller';
 import { IssuedBookDto } from './entities/issued-book.dto';
 import { UserDto, UserController, UserService } from './user';
 import { AuthModule } from './user/auth.module';
-import { MediaService } from './media/media.service';
-import { MediaController } from './media/media.controller';
 import { MediaDto } from './entities/media.dto';
+import { MediaController } from './media/media.controller';
+import MediaService from './media/media.service';
+
 
 @Module({
   imports: [
@@ -58,8 +59,8 @@ import { MediaDto } from './entities/media.dto';
         UserDto,
         MediaDto,
       ],
-    synchronize: true,
-    dropSchema: true,
+    // synchronize: true,
+    // dropSchema: true,
     }),
     AuthModule,
   ],

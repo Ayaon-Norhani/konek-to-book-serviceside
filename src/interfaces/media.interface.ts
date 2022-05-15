@@ -1,1 +1,5 @@
-export interface Media {}
+export interface Media {
+    id?: number;
+    fileName?: string;
+    mimeType?: string;
+}

@@ -23,6 +23,9 @@ import { IssuedBookController } from './issued-book/issued-book.controller';
 import { IssuedBookDto } from './entities/issued-book.dto';
 import { UserDto, UserController, UserService } from './user';
 import { AuthModule } from './user/auth.module';
+import { MediaService } from './media/media.service';
+import { MediaController } from './media/media.controller';
+import { MediaDto } from './entities/media.dto';
 
 @Module({
   imports: [
@@ -35,6 +38,7 @@ import { AuthModule } from './user/auth.module';
       BorrowerDto,
       IssuedBookDto,
       UserDto,
+      MediaDto,
     ]),
     TypeOrmModule.forRoot({
       type: 'mysql',
@@ -52,9 +56,10 @@ import { AuthModule } from './user/auth.module';
         BorrowerDto,
         IssuedBookDto,
         UserDto,
+        MediaDto,
       ],
-    //synchronize: true,
-    //dropSchema: true,
+    synchronize: true,
+    dropSchema: true,
     }),
     AuthModule,
   ],
@@ -67,6 +72,7 @@ import { AuthModule } from './user/auth.module';
     BorrowerController,
     IssuedBookController,
     UserController,
+    MediaController,
   ],
   providers: [
     AuthorService,
@@ -77,6 +83,7 @@ import { AuthModule } from './user/auth.module';
     BorrowerService,
     IssuedBookService,
     UserService,
+    MediaService,
   ],
 })
 export class AppModule {}

@@ -10,7 +10,7 @@ export class MediaDto implements Media {
 
   @ApiProperty()
   @Column()
-  mimeType: string;
+  mimeType?: string;
 
   @ApiProperty({ required: false })
   @Column()

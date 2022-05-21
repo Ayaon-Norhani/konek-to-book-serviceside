@@ -5,6 +5,7 @@ import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
 import { Users } from '../interfaces/users.interface';
 import { UserDto } from './user.entity';
+import { ChangePasswordDto } from './user.dto';
 
 @Injectable()
 export class AuthService {
@@ -62,6 +63,18 @@ export class AuthService {
     user.password = hashedPassword;
     user.username = user.username.toLowerCase();
     return await this.userService.create(user);
+  }
+  async changePassword(user: UserDto, info: ChangePasswordDto) {
+    const passwordMatched =
+      user && (await bcrypt.compare(info.oldPassword, user.password));
+    console.log('passwordMatched', passwordMatched);
+    if (!passwordMatched) {
+      throw new HttpException('Bad Old Password', HttpStatus.BAD_REQUEST);
+    }
+    const newPassword = await bcrypt.hash(info.newPassword, 10);
+    const newUserInfo = { ...user, password: newPassword } as UserDto;
+    console.log('newUserInfo', newUserInfo);
+    return this.userService.update(user.id, newUserInfo);
   }
 
   async setCurrentRefreshToken(refreshToken: string, userId: number) {

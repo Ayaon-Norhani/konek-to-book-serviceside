@@ -71,8 +71,8 @@ export class RegisterUserDto implements IUser {
   @Column({ length: 100 })
   password: string;
 
-  @ApiProperty()
-  @Column()
+  @ApiProperty({required: false })
+  @Column({ nullable: true })
   url: string;
 }
 
@@ -114,4 +114,12 @@ export class AccessTokenDto {
     minLength: 5,
   })
   refreshToken?: string;
+}
+
+export class ChangePasswordDto {
+  @ApiProperty()
+  oldPassword: string;
+  
+  @ApiProperty()
+  newPassword: string;
 }

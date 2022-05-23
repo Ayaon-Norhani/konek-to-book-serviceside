@@ -56,8 +56,8 @@ export class UserDto implements Users {
   @Column({ length: 100 })
   password: string;
 
-  @ApiProperty()
-  @Column()
+  @ApiProperty({ required: false })
+  @Column({ nullable: true })
   url: string;
 
   @ApiProperty({ required: false })

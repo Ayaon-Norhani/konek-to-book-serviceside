@@ -37,7 +37,7 @@ export class AuthController {
   @ApiResponse({ status: 200, type: UserDto })
   @Post('/register')
   create(@Body() user: UserDto) {
-    if (user.refreshToken == 'eSugo') {
+    if (user.refreshToken == 'LMS KonekToBook') {
       return this.authService.register({
         ...user,
         refreshToken: undefined,

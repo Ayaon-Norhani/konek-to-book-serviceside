@@ -15,6 +15,7 @@ export interface IUser {
   email?: string;
   User_Type?: 'admin' | 'librarian';
   User_Status: 'active' | 'inactive';
+  url: string;
 }
 
 export class RegisterUserDto implements IUser {
@@ -69,6 +70,10 @@ export class RegisterUserDto implements IUser {
   @ApiProperty({ default: 'password' })
   @Column({ length: 100 })
   password: string;
+
+  @ApiProperty()
+  @Column()
+  url: string;
 }
 
 export class LoginUserDto implements IUser {
@@ -80,6 +85,7 @@ export class LoginUserDto implements IUser {
   U_Birth_Date: string;
   Address: string;
   U_Contact_Number: string;
+  url: string;
   @ApiProperty()
   username?: string;
   @ApiProperty()

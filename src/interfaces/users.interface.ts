@@ -12,6 +12,7 @@ export interface Users {
   email?: string;
   User_Type?: 'admin' | 'librarian';
   User_Status: 'active' | 'inactive';
+  url: string;
 
   // User_ID?: number;
   // Username: string;

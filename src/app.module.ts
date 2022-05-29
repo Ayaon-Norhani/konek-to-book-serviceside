@@ -1,8 +1,5 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AuthorService } from './author/author.service';
-import { AuthorController } from './author/author.controller';
-import { AuthorDto } from './entities/author.dto';
 import { CategoryController } from './category/category.controller';
 import { CategoryService } from './category/category.service';
 import { CategoryDto } from './entities/category.dto';
@@ -27,11 +24,9 @@ import { MediaDto } from './entities/media.dto';
 import { MediaController } from './media/media.controller';
 import MediaService from './media/media.service';
 
-
 @Module({
   imports: [
     TypeOrmModule.forFeature([
-      AuthorDto,
       CategoryDto,
       PublisherDto,
       BookDto,
@@ -49,7 +44,6 @@ import MediaService from './media/media.service';
       password: 'root',
       database: 'konek_to_bookdb',
       entities: [
-        AuthorDto,
         CategoryDto,
         PublisherDto,
         BookDto,
@@ -59,13 +53,12 @@ import MediaService from './media/media.service';
         UserDto,
         MediaDto,
       ],
-    // synchronize: true,
-    // dropSchema: true,
+      // synchronize: true,
+      // dropSchema: true,
     }),
     AuthModule,
   ],
   controllers: [
-    AuthorController,
     CategoryController,
     PublisherController,
     BookController,
@@ -76,7 +69,6 @@ import MediaService from './media/media.service';
     MediaController,
   ],
   providers: [
-    AuthorService,
     CategoryService,
     PublisherService,
     BookService,

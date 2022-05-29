@@ -7,7 +7,6 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { AuthorDto } from './author.dto';
 import { CategoryDto } from './category.dto';
 import { PublisherDto } from './publisher.dto';
 import { BookFinesDto } from './book-fines.dto';
@@ -23,12 +22,16 @@ export class BookDto implements Book {
   @Column({ length: 100 })
   ISBN: string;
 
+  @ApiProperty({ example: 'Mikaela D. Cruz'})
+  @Column({ length: 1000 })
+  Author: string;
+
   @ApiProperty({ example: '906', required: false })
   @Column({ length: 100, nullable: true })
   Call_Number: string;
 
   @ApiProperty({ example: 'Data Structure and Algorithms' })
-  @Column({ length: 100 })
+  @Column({ length: 1000})
   Title: string;
 
   @ApiProperty({ example: '2nd Edition', required: false })
@@ -59,29 +62,6 @@ export class BookDto implements Book {
   @Column({ length: 100 })
   Availability: 'Yes' | 'No';
 
-  /* @ManyToMany(() => AuthorDto)
-  @JoinTable({ name: 'Author_ID' })
-  authors: AuthorDto[];
-
-   @ManyToOne(() => AuthorDto, (authors) => authors.books)
-  @JoinColumn({ name: 'Author_ID' })
-  authors: AuthorDto[];
-
-  @ManyToOne(() => CategoryDto, (categories) => categories.books)
-  @JoinColumn({ name: 'Category_ID' })
-  categories: CategoryDto[];
-
-  @ManyToOne(() => PublisherDto, (publishers) => publishers.books)
-  @JoinColumn({ name: 'Publisher_ID' })
-  publishers: PublisherDto[];
-
-   @OneToMany(() => BookFinesDto, (fine) => fine.book)
-  fine: BookFinesDto;
-*/
-
-  @ApiProperty({ required: false, type: () => AuthorDto })
-  @ManyToOne(() => AuthorDto, (authors) => authors.bookauthors)
-  authors: AuthorDto;
 
   @ApiProperty({ required: false, type: () => CategoryDto })
   @ManyToOne(() => CategoryDto, (categories) => categories.bookcategory)

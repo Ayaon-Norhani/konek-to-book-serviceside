@@ -18,11 +18,11 @@ export class BookFinesDto implements BookFines {
   BookFines_ID?: number;
 
   @ApiProperty({ example: 'Algorithms' })
-  @Column({ length: 100 })
+  @Column()
   Title: string;
 
   @ApiProperty({ example: 'Jyyhan' })
-  @Column({ length: 100 })
+  @Column()
   Borrower_Name: string;
 
   @ApiProperty({ example: '09-23-22' })

@@ -20,11 +20,11 @@ export class IssuedBookDto implements IssuedBook {
   IssuedBook_ID?: number;
 
   @ApiProperty({ example: 'Algorithms' })
-  @Column({ length: 100 })
+  @Column()
   Title: string;
 
   @ApiProperty({ example: 'Jyyhan' })
-  @Column({ length: 100 })
+  @Column()
   Borrower_Name: string;
 
   @ApiProperty({ example: '09-12-21' })
@@ -79,5 +79,4 @@ export class IssuedBookDto implements IssuedBook {
 
   @OneToMany(() => BookFinesDto, (fines) => fines.issued)
   fines: BookFinesDto[];
-  
 }

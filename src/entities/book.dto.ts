@@ -22,7 +22,7 @@ export class BookDto implements Book {
   @Column({ length: 100 })
   ISBN: string;
 
-  @ApiProperty({ example: 'Mikaela D. Cruz'})
+  @ApiProperty({ example: 'Mikaela D. Cruz' })
   @Column({ length: 1000 })
   Author: string;
 
@@ -31,11 +31,11 @@ export class BookDto implements Book {
   Call_Number: string;
 
   @ApiProperty({ example: 'Data Structure and Algorithms' })
-  @Column({ length: 1000})
+  @Column()
   Title: string;
 
   @ApiProperty({ example: '2nd Edition', required: false })
-  @Column({ length: 100, nullable: true })
+  @Column({ nullable: true })
   Edition: string;
 
   @ApiProperty({ example: '567809', required: false })
@@ -51,7 +51,7 @@ export class BookDto implements Book {
   Series: string;
 
   @ApiProperty({ example: 'comment or concern', required: false })
-  @Column({ length: 100, nullable: true })
+  @Column({ nullable: true })
   Notes: string;
 
   @ApiProperty({ example: 'New' })
@@ -61,7 +61,6 @@ export class BookDto implements Book {
   @ApiProperty({ example: 'YES' })
   @Column({ length: 100 })
   Availability: 'Yes' | 'No';
-
 
   @ApiProperty({ required: false, type: () => CategoryDto })
   @ManyToOne(() => CategoryDto, (categories) => categories.bookcategory)
